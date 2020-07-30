@@ -20,10 +20,10 @@ func makeSlice(leng, maxn int) []int {
 	return s
 }
 
-func sort(leng int, s []int) {
+func sort(s []int) {
 	for {
 		changed := false
-		for i := 0; i < leng-1; i++ {
+		for i := 0; i < len(s)-1; i++ {
 			if s[i] > s[i+1] {
 				s[i], s[i+1] = s[i+1], s[i]
 				changed = true
@@ -49,7 +49,7 @@ func main() {
 	fmt.Printf("%+v \n", s)
 	fmt.Println("Sorting...")
 
-	sort(*lengOfSlice, s)
+	sort(s)
 
 	fmt.Printf("%+v \n", s)
 	fmt.Println("Done!")
