@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"testing"
+	"time"
 )
 
 type testRandStruct struct {
@@ -50,6 +52,15 @@ func TestMakeSlice(t *testing.T) {
 	}
 }
 
+func BenchmarkMakeSlice(b *testing.B) {
+	src := rand.NewSource(time.Now().UnixNano())
+	rand := rand.New(src)
+
+	for i := 0; i < b.N; i++ {
+		_ = makeSlice(rand, 10, 100)
+	}
+}
+
 func TestSort(t *testing.T) {
 	var testCase = []struct {
 		name     string
@@ -74,5 +85,12 @@ func TestSort(t *testing.T) {
 				}
 			}
 		})
+	}
+}
+
+func BenchmarkSort(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		var bslice = []int{10, 9, 8, 7, 6, 5, 4, 3, 2, 1}
+		sort(bslice)
 	}
 }
